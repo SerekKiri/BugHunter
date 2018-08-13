@@ -1,6 +1,4 @@
 const Discord = require('discord.js')
-
-client.login(process.env.BOT_TOKEN);
 // const config = require('./config')
 //const token = "NDc4NjY3NzkwOTQxODE0Nzg3.DlOCkA.CpqyVESgduKQV-Ow1fx9DA3y8wQ"
 // commands import
@@ -18,9 +16,10 @@ client.on('ready', () => {
 client.commands = new Discord.Collection()
 
 
-/* client.on('message', async (message) => {
+client.on('message', async (message) => {
   const command = message.content.slice(config.prefix.length)
   
-}) */
+})
 
-client.login(token)
+// client.login(token)
+client.login(process.env.BOT_TOKEN);
