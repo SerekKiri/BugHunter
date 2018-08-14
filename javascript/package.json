@@ -1,0 +1,38 @@
+{
+  "name": "bughunter",
+  "version": "0.5.0",
+  "description": "Bug hunting bot",
+  "main": "./src/index.js",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "discord.js": "^11.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3"
+  },
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "lint": "eslint --ext .js, src test",
+    "lint:fix": "eslint --ext .js, --fix src test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quritto/DenisAskedMeToDoThisBotForReportBugs"
+  },
+  "author": "animek66",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quritto/DenisAskedMeToDoThisBotForReportBugs/issues"
+  },
+  "homepage": "https://github.com/quritto/DenisAskedMeToDoThisBotForReportBugs/blob/master/README.md",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "node"
+    ]
+  }
+}
