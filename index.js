@@ -12,14 +12,5 @@ client.on('ready', () => {
   client.user.setPresence({ game: 'DevTycoon bugs' , type: 3 })
 })
 
-// commands handler
-client.commands = new Discord.Collection()
-
-
-client.on('message', async (message) => {
-  const command = message.content.slice(config.prefix.length)
-  
-})
-
 // client.login(token)
 client.login(process.env.BOT_TOKEN);
