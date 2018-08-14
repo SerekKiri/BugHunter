@@ -16,7 +16,7 @@ class BugHunter:
             cmdPrefix = data['prefix']
             botToken = data['token']
     async def handleCommands(self, command):
-        
+        print('dwefqfwq')
     #events
     async def onReady(self):
         print('Logged in as', client.user.name, 'with ID', client.user.id)
