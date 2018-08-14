@@ -17,12 +17,12 @@ client.on('ready', () => {
 
 client.on('message', async (message) => {
     if (message.content.substring(0, config.prefix.length) === config.prefix) {
-        const command = message.content.slice(config.prefix.length)
 
             if(message.content.startsWith(config.prefix + 'bug')) {
                report(message)
             }
-            if(command === 'help') {
+
+            if(message.content.startsWith(config.prefix + 'help')) {
                 help(message)
             }
         }

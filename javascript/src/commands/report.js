@@ -1,9 +1,19 @@
-function bug(message, client) {
+function bug(message) {
+
+    // variables
     let mes = message.content.slice(11)
     const time = new Date(message.createdTimestamp)
-    const aut = message.author.username + ' #' +  message.author.discriminator
+    const aut = message.author.username + '#' +  message.author.discriminator
     const avatar = message.author.avatarURL
-    if (mes === null && mes.length < 10) {
+     if (message.guild.id === '367325058353594378') {
+      chan = 'bugs-js'
+     } else if (message.guild.id === '382070408226275328'){
+       chan = '👾-devtycoon™-bugs'
+     } else {
+       chan = '👾-devtycoon™-bugs'
+     }
+
+    if (mes.length < 10) {
         message.reply('You need to describe bug, min 10 letters')
     } else {
     try {
@@ -11,7 +21,7 @@ function bug(message, client) {
             title: `Report from ${aut}`,
             description: '**Report text:**\n' + mes,
             timestamp: time,
-            color: 15605837,
+            color: 15859772,
             footer: {
               icon_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCaZDPW_-dzsNbodLC5KiAT3BlciGOybFjsUZPRSKI2u7tuQg2BQ',
               text: 'BugHunter by R1SK and Kiritito',
@@ -20,7 +30,8 @@ function bug(message, client) {
               url: avatar,
             }
           }
-          message.channel.send({ embed })
+          message.guild.channels.find("name", chan).send({ embed })
+          // message.channel.send({ embed })
       } catch (err) {
         console.log(err)
     }
