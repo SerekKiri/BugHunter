@@ -1,1 +1,1 @@
-# JavaScript version
+# JavaScript version by Kiritito
