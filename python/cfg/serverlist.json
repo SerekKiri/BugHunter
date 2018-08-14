@@ -1,0 +1,18 @@
+[
+	{
+		"name": 'servername',
+		"channels":
+		[
+			"channel1",
+			"channel2"
+		]
+	},
+	{
+		"name": "servername2",
+		"channels":
+		[
+			"channel1",
+			"channel2"
+		]
+	}
+]
