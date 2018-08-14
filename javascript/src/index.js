@@ -1,5 +1,12 @@
 const Discord = require('discord.js');
+
+// importing files
 const config = require('./config.json')
+const help = require('./commands/help')
+const report = require('./commands/report')
+
+// variables
+let channelsBugs = ['478884266852483073', '478886481281417216']
 
 const client = new Discord.Client();
 
@@ -10,17 +17,15 @@ client.on('ready', () => {
 
 client.on('message', async (message) => {
     if (message.content.substring(0, config.prefix.length) === config.prefix) {
-        const command = message.content.slice(config.prefix.length);
+        const command = message.content.slice(config.prefix.length)
 
-        switch (command) {
-            case 'report':
-              report(message);
-              break;
-            case 'help':
-              help(message);
-              break;
-          }
-    }
-})
+            if(message.content.startsWith(config.prefix + 'bug')) {
+               report(message)
+            }
+            if(command === 'help') {
+                help(message)
+            }
+        }
+    })
 
 client.login(config.token)
