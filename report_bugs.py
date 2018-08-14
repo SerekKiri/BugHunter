@@ -2,10 +2,10 @@ import discord
 import asyncio
 import datetime
 from discord.ext import commands
+from src.config import token
 
 cmdPrefix = ';'
 client = discord.Client()
-botToken = 'NDc4NjY3NzkwOTQxODE0Nzg3.DlQukw.i2dNkRKBdPReoqQmA6KJe0ly7xE'
 
 class BugHunter:
 	@client.event
@@ -30,4 +30,4 @@ def setup(bot):
 @client.event
 def xd():
 	print('xdd')
-client.run(botToken)
+client.run(token)
