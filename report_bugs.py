@@ -1,18 +1,20 @@
 import discord
 import asyncio
 import datetime
+import json
 from discord.ext import commands
-from src.config import token
 
-cmdPrefix = ';'
+cmdPrefix = ''
 client = discord.Client()
-<<<<<<< Updated upstream
-=======
-botToken = 'NDc4ODY3MTQyNjMzMDYyNDEw.DlQ7Wg.g9CpgSR6r-VZBW4AZovaz_FWU0I'
->>>>>>> Stashed changes
+botToken = ''
 
 class BugHunter:
     #functions
+    async def loadConfig(self, filename):
+        with open(filename, 'r') as file:
+            data = json.load(file)
+            cmdPrefix = data['prefix']
+            botToken = data['token']
     async def handleCommands(self, command):
         
     #events
