@@ -5,7 +5,7 @@ from discord.ext import commands
 
 cmdPrefix = ';'
 client = discord.Client()
-botToken = 'NDc4NjY3NzkwOTQxODE0Nzg3.DlQukw.i2dNkRKBdPReoqQmA6KJe0ly7xE'
+botToken = 'duap.DlQukw.i2dNkRKBdPReoqQmA6KJe0ly7xE'
 
 class BugHunter:
 	@client.event
