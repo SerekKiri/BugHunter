@@ -30,4 +30,4 @@ def setup(bot):
 @client.event
 def xd():
 	print('xdd')
-client.run(token)
+client.run(botToken)
