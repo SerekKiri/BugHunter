@@ -12,13 +12,6 @@ function bug(message) {
   const time = new Date(message.createdTimestamp)
   const aut = message.author.username + '#' +  message.author.discriminator
   const avatar = message.author.avatarURL
-   if (message.guild.id === '367325058353594378') {
-    chan = 'bugs-js'
-   } else if (message.guild.id === '382070408226275328'){
-     chan = '??-devtycoon™-bugs'
-   } else {
-     chan = '??-devtycoon™-bugs'
-   }
 
   if (mes[0].length < 10) {
       message.reply('You need to describe bug, min 10 letters')
@@ -37,7 +30,7 @@ function bug(message) {
             url: avatar,
           }
         }
-        message.guild.channels .find(v => v.name === chan).send({ embed })
+        message.guild.channels .find(v => v.name === 'bugs-log').send({ embed })
         // message.channel.send({ embed })
     } catch (err) {
       console.log(err)
