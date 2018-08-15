@@ -1,8 +1,8 @@
 {
-	'servers': 
+	"servers": 
 	[
 		{
-			"name": 'servername',
+			"name": "servername",
 			"channels":
 			[
 				"channel1",

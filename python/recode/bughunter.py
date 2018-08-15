@@ -42,14 +42,16 @@ class JConfig:
 			return False
 		return True
 	def readServers(self):
-		print(self.jsonFile)
 		serverList = []
 		for server in self.jsonFile['servers']:
+			print(server)
 			channelList = []
 			for channel in server['channels']:
+				print(channel)
 				channelList.append(channel)
 			sServer = CfgServer()
 			sServer.initialise(server['name'], channelList)
+			print('dupa', sServer.name, sServer.channelList[0], sServer.channelList[1])
 			serverList.append(sServer)
 		return serverList
 
@@ -94,15 +96,14 @@ class BugHunter:
 		config = JConfig('cfg\\config.json')
 		data = JConfig('cfg\\data.json')
 		config.read()
+		data.read()
 		self.version = config.readValue('version')
 		self.token = config.readValue('token')
 		self.cmdPrefix = config.readValue('prefix')
 		self.argSeparator = config.readValue('argSeparator')
 		self.normalUser = config.readBoolean('normalUser')
 		self.serverList = data.readServers()
-		print('\nqffwqfwq\n\nfwq\n\nqwffwqfwqfwq')
-		print(self.version, self.token, self.cmdPrefix, self.argSeparator. self.normalUser, self.serverList)
-		print('\nfwqfwqfwq\nfwqfwq\n')
+		print(self.serverList)
 		print('Config loaded')
 	#Main functions
 	def initialise(self):
@@ -110,7 +111,7 @@ class BugHunter:
 	#Event handlers
 	async def onReady(self):
 		print('BugHunter by R1SK & Kiritito')
-		print('Logged in as', client.user.name, 'with ID', client.user.id)
+		print('Logged in as', self.client.user.name, 'with ID', self.client.user.id)
 		isReady = True
 	async def onMessage(self, message):
 		if(self.isReady == False):
