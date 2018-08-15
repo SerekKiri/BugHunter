@@ -5,13 +5,17 @@
   "main": "./src/index.js",
   "dependencies": {
     "debug": "^3.1.0",
-    "discord.js": "^11.3.2"
+    "discord.js": "^11.3.2",
+    "ramda": "^0.25.0",
+    "redux": "^4.0.0",
+    "zeal-redux-utils": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3"
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "nodemon": "^1.18.3"
   },
   "scripts": {
     "start": "nodemon src/index.js",
