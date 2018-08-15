@@ -1,5 +1,8 @@
+const serv = require('../servers.json')
+
 function bug(message) {
 
+  const guildID = message.guild.id
   // variables
   let mes = message.content.slice(11).split('|')
   let img = message.content.split('| ')
@@ -12,7 +15,7 @@ function bug(message) {
   const time = new Date(message.createdTimestamp)
   const aut = message.author.username + '#' +  message.author.discriminator
   const avatar = message.author.avatarURL
-
+ if (serv.servers[guildID]) {
   if (mes[0].length < 10) {
       message.reply('You need to describe bug, min 10 letters')
   } else {
@@ -30,12 +33,14 @@ function bug(message) {
             url: avatar,
           }
         }
-        message.guild.channels .find(v => v.name === 'bugs-log').send({ embed })
-        // message.channel.send({ embed })
+        message.guild.channels.get(serv.servers[guildID]).send({ embed })
     } catch (err) {
       console.log(err)
+   }
   }
-}
+ } else {
+  message.reply('You need to setup channel with logs. Just write ``add channel``.')
+ }
 }
 
 module.exports = bug
