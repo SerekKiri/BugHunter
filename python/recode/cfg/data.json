@@ -2,11 +2,11 @@
 	"servers": 
 	[
 		{
-			"name": "servername",
+			"name": "Projekty",
 			"channels":
 			[
-				"channel1",
-				"channel2"
+				"testy-python",
+				"bugs-py"
 			]
 		}
 	]
