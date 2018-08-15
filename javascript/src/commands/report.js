@@ -1,9 +1,9 @@
-const serv = require('../servers.json')
-
 function bug(message) {
-
-  const guildID = message.guild.id
   // variables
+  const fs = require('fs')
+  const serv = fs.readFileSync('./servers.json')
+  const guildID = message.guild.id
+  const obj = JSON.parse(serv)
   let mes = message.content.slice(11).split('|')
   let img = message.content.split('| ')
   let text = ''
@@ -15,7 +15,7 @@ function bug(message) {
   const time = new Date(message.createdTimestamp)
   const aut = message.author.username + '#' +  message.author.discriminator
   const avatar = message.author.avatarURL
- if (serv.servers[guildID]) {
+ if (obj.servers[guildID]) {
   if (mes[0].length < 10) {
       message.reply('You need to describe bug, min 10 letters')
   } else {
@@ -26,14 +26,13 @@ function bug(message) {
           timestamp: time,
           color: 15859772,
           footer: {
-            icon_url: 'https://expensify.files.wordpress.com/2012/01/no_bug.png',
-            text: 'BugHunter by R1SK and Kiritito',
+            text: 'BugHunter by R1SK, Kiritito and Piter',
           },
           thumbnail: {
             url: avatar,
           }
         }
-        message.guild.channels.get(serv.servers[guildID]).send({ embed })
+        message.guild.channels.get(obj.servers[guildID]).send({ embed })
     } catch (err) {
       console.log(err)
    }
