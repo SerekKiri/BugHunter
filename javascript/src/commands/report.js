@@ -26,7 +26,7 @@ function bug(message) {
           timestamp: time,
           color: 15859772,
           footer: {
-            icon_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCaZDPW_-dzsNbodLC5KiAT3BlciGOybFjsUZPRSKI2u7tuQg2BQ',
+            icon_url: 'https://expensify.files.wordpress.com/2012/01/no_bug.png',
             text: 'BugHunter by R1SK and Kiritito',
           },
           thumbnail: {
