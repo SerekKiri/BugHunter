@@ -1,5 +1,4 @@
 function send(message) {
-  console.log(message.channel.id) 
   const fs = require('fs');
 
     const pipe = (...fns) => val => fns.reduce((acc, fn) => fn(acc), val)
@@ -61,12 +60,11 @@ const transformation = pipe(
 
 const updateJsonData = (file, pred) => {
   const jsonData = JSON.parse(fs.readFileSync(file, 'utf8'))
-  console.log(jsonData, pred(jsonData))
   fs.writeFileSync(file, JSON.stringify(pred(jsonData), null, 2));
 }
 
 // wołaj to kiedy Ci się tam podoba 
-updateJsonData('./servers.json', transformation)
+updateJsonData('./src/servers.json', transformation)
 }
 
 module.exports = send

@@ -27,7 +27,6 @@ client.on('message', async (message) => {
             }
 
             if (message.content.startsWith('add channel')) {
-                console.log(message)
                 server(message)
             }
     })
