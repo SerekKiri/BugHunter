@@ -1,76 +1,27 @@
 
-function send(message) {
-  if (message.member.hasPermission('MANAGE_CHANNELS')) {
-  const fs = require('fs')
 
-    const pipe = (...fns) => val => fns.reduce((acc, fn) => fn(acc), val)
-    
-    const dispatch = action => state => reducer(state, action)
+const R = require('ramda');
+const { createReducer, createActionTypes } = require('zeal-redux-utils');
 
-function reducer(state, action) {
-  switch(action.type) {
-    case 'UPDATE_TIME': {
-      return {
-        ...state,
-        time: new Date(),
-      }
-    }
-    case 'ADD_CHANNEL': {
-        return {
-          ...state,
-          data: [
-            ...state.data,
-            action.payload.id
-          ],
-        }
-      }
-    case 'ADD_SERVER': {
-      return {
-        ...state,
-        servers: {
-          ...state.servers,
-          [action.payload.server]: action.payload.channel,
-        }
-      }
-    }
-    default: return state
-  }
-}
+const ActionType = createActionTypes("server", [
+  "ADD",
+]);
 
-const addChannel = (id) => ({
-  type: 'ADD_CHANNEL',
-  payload: {
-    id,
-  }
+const serverReducer = createReducer({}, {
+  [ActionType.ADD]: (state, { payload }) => R.assoc(payload.server, payload.channel, state),
 })
 
-const updateTime = () => ({
-  type: 'UPDATE_TIME',
-});
-
 const addServer = (msg) => ({
-  type: 'ADD_SERVER',
+  type: ActionType.ADD,
   payload: {
     channel: msg.channel.id,
     server: msg.guild.id,
   }
 })
 
-const transformation = pipe(
-  dispatch(addServer(message)),
-)
-
-const updateJsonData = (file, pred) => {
-  const jsonData = JSON.parse(fs.readFileSync(file, 'utf8'))
-  fs.writeFileSync(file, JSON.stringify(pred(jsonData), null, 2));
-}
-
-// wołaj to kiedy Ci się tam podoba 
-updateJsonData('./servers.json', transformation)
-  message.reply('Channel set up successfully!')
-  } else {
-    message.reply('You need specific permision to use this command("manage channels").')
+module.exports = {
+  serverReducer,
+  actions: {
+    addServer,
   }
-}
-
-module.exports = send
+};
