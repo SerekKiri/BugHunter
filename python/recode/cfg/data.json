@@ -1,0 +1,13 @@
+{
+	'servers': 
+	[
+		{
+			"name": 'servername',
+			"channels":
+			[
+				"channel1",
+				"channel2"
+			]
+		}
+	]
+}
