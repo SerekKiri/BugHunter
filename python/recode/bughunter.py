@@ -2,6 +2,7 @@ import discord
 import asyncio
 import datetime
 import json
+import io
 
 #Structure for single server
 class CfgServer:
@@ -51,6 +52,9 @@ class JConfig:
 			sServer.initialise(server['name'], channelList)
 			serverList.append(sServer)
 		return serverList
+	def addServer(self, CfgServer):
+		file = open(self.fileName, 'r+')
+		print(file.read())
 
 #Main class
 class BugHunter:
@@ -70,17 +74,6 @@ class BugHunter:
 			if(server.name == serverName):
 				return True
 		return False
-	def getAllBotChannelsAtServer(self, server):
-		parsedServer = 0
-		for x in self.serverList:
-			if(x.name == server.name):
-				parsedServer = x
-		channels = []
-		for channel in server.channels:
-			for x in parsedServer.channelList:
-				if(channel.name == x):
-					channels.append(discord.utils.get(self.client.get_all_channels(), server__name=server.name, name=channel.name))
-		return channels
 	def findAllOccurrences(self, s, ch):
 		idxs = []
 		for i in range(len(s)):
@@ -134,31 +127,39 @@ class BugHunter:
 		self.argSeparator = config.readValue('argSeparator')
 		self.normalUser = config.readBoolean('normalUser')
 		self.serverList = data.readServers()
+		newServer = CfgServer()
+		data.addServer(newServer)
 		print('Config loaded')
 	#SubFunctions
-	def sendEmbedAtMultipleChannels(self, channels, embed):
-		for channel in channels:
-			channel.send(embed=embed)
+	async def sendEmbedAtBotChannelsAtServer(self, server, embed):
+		cfgServer = 0
+		for x in self.serverList:
+			if x.name == server.name:
+				cfgServer = x
+		for channel in server.channels:
+			for channelname in cfgServer.channelList:
+				if channel.name == channelname:
+					await channel.send(embed=embed)
 	def createHelpEmbed(self):
-		embed=discord.Embed(title='Help', description='Usage -> bug report bug description (additional -> screenshot)')
+		embed=discord.Embed(title='Help', description='Usage -> bug report bug description (additional -> screenshot)', color=0xff0000)
 		embed.set_author(name='BugHunter', url='https://github.com/quritto/DenisAskedMeToDoThisBotForReportBugs', icon_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCaZDPW_-dzsNbodLC5KiAT3BlciGOybFjsUZPRSKI2u7tuQg2BQ')
-		embed.set_footer(text='BugHunter by Kiritito and R1SK')
+		embed.set_footer(text='BugHunter by Kiritito, R1SK and Piter')
 		return embed
 	def createBugReportEmbed(self, message, parsedMsg):
-		title = message.author.mention + ' ' + 'sent report'
+		title = message.author.name + ' ' + 'sent report'
 		embed=discord.Embed(title=title, description=parsedMsg.args[0], color=0xff0000)
 		embed.set_author(name='BugHunter', url='https://github.com/quritto/DenisAskedMeToDoThisBotForReportBugs',icon_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCaZDPW_-dzsNbodLC5KiAT3BlciGOybFjsUZPRSKI2u7tuQg2BQ')
-		embed.set_footer(text='BugHunter by Kiritito and R1SK')
+		embed.set_footer(text='BugHunter by Kiritito, R1SK and Piter')
 		return embed
 	#Main functions
 	def initialise(self):
-		print('BugHunter by R1SK & Kiritito')
+		print('BugHunter by R1SK, Kiritito & Piter')
 		self.loadConfig()
-	def handleCommands(self, message, parsedMessage):
-		if(parsedMessage.command == 'report'):
-			self.sendEmbedAtMultipleChannels(self.getAllBotChannelsAtServer(message.guild), self.createBugReportEmbed(message, parsedMessage))
-		else:
-			self.sendEmbedAtMultipleChannels(self.getAllBotChannelsAtServer(message.guild), self.createHelpEmbed())
+	#def handleCommands(self, message, parsedMessage):
+		#if(parsedMessage.command == 'report'):
+			#self.sendEmbedAtMultipleChannels(self.getAllBotChannelsAtServer(message.guild), self.createBugReportEmbed(message, parsedMessage))
+		#else:
+			#self.sendEmbedAtMultipleChannels(self.getAllBotChannelsAtServer(message.guild), self.createHelpEmbed())
 	#Event handlers
 	async def onReady(self):
 		print('Logged in as', self.client.user.name, 'with ID', self.client.user.id)
@@ -168,11 +169,10 @@ class BugHunter:
 			return
 		if(self.isCommand(message) and self.isServerAtList(message.guild.name)):
 			msg = self.commandAndArgsFromMessage(message)
-			self.handleCommands(message, msg)
-			print('parameter count ----->', msg.argCount)
-			print('command ----->', msg.command)
-			print('args ----->', msg.args)
-
+			if(msg.command == 'report'):
+				await self.sendEmbedAtBotChannelsAtServer(message.guild, self.createBugReportEmbed(message, msg))
+			else:
+				await self.sendEmbedAtBotChannelsAtServer(message.guild, self.createHelpEmbed())
 Main = BugHunter() 
 
 Main.initialise()

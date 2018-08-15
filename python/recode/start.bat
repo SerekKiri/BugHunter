@@ -1,4 +1,4 @@
 @echo off
-title BugHunter by R1SK and Kiritito
+title BugHunter by R1SK Kiritito and Piter
 python bughunter.py
 pause
