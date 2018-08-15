@@ -2,7 +2,6 @@ import discord
 import asyncio
 import datetime
 import json
-import io
 
 #Structure for single server
 class CfgServer:
@@ -29,6 +28,7 @@ class ParsedCommand:
 class JConfig:
 	fileName = ''
 	jsonFile = 0
+	file = 0
 	def __init__(self, cfgName):
 		self.fileName = cfgName
 	def read(self):
@@ -53,8 +53,31 @@ class JConfig:
 			serverList.append(sServer)
 		return serverList
 	def addServer(self, CfgServer):
-		file = open(self.fileName, 'r+')
-		print(file.read())
+		self.file = open(self.fileName, 'r+')
+		self.jsonFile = json.load(self.file)
+		servers = self.jsonFile['servers']
+		servers.append({'name' : CfgServer.name, 'channels' : CfgServer.channelList})
+		self.jsonFile['servers'] = servers
+		newJson = json.dumps(self.jsonFile, indent = 2)
+		self.file.seek(0)
+		self.file.write(newJson)
+		self.file.close()
+	def addChannelToServer(self, serverName, channelName):
+		self.file = open(self.fileName, 'r+')
+		self.jsonFile = json.load(self.file)
+		channels = []
+		server = 0
+		for x in self.jsonFile['servers']:
+			if(x['name'] == serverName):
+				channels = x['channels']
+				server = x
+		channels.append(channelName)
+		x['channels'] = channels
+		newJson = json.dumps(self.jsonFile, indent = 4)
+		self.file.seek(0)
+		self.file.write(newJson)
+		print(self.file.read())
+		self.file.close()
 
 #Main class
 class BugHunter:
@@ -128,7 +151,7 @@ class BugHunter:
 		self.normalUser = config.readBoolean('normalUser')
 		self.serverList = data.readServers()
 		newServer = CfgServer()
-		data.addServer(newServer)
+		newServer.initialise('serverName', ['channel1', 'channel2'])
 		print('Config loaded')
 	#SubFunctions
 	async def sendEmbedAtBotChannelsAtServer(self, server, embed):
@@ -141,7 +164,7 @@ class BugHunter:
 				if channel.name == channelname:
 					await channel.send(embed=embed)
 	def createHelpEmbed(self):
-		embed=discord.Embed(title='Help', description='Usage -> bug report bug description (additional -> screenshot)', color=0xff0000)
+		embed=discord.Embed(title='Help', description='Usage -> bug report bug description (additional -> screenshot)\nbug add channel -> add / remove this channel (and server)', color=0xff0000)
 		embed.set_author(name='BugHunter', url='https://github.com/quritto/DenisAskedMeToDoThisBotForReportBugs', icon_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCaZDPW_-dzsNbodLC5KiAT3BlciGOybFjsUZPRSKI2u7tuQg2BQ')
 		embed.set_footer(text='BugHunter by Kiritito, R1SK and Piter')
 		return embed
