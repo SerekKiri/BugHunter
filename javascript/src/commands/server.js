@@ -1,4 +1,6 @@
+
 function send(message) {
+  if (message.member.hasPermission('MANAGE_CHANNELS')) {
   const fs = require('fs')
 
     const pipe = (...fns) => val => fns.reduce((acc, fn) => fn(acc), val)
@@ -65,6 +67,10 @@ const updateJsonData = (file, pred) => {
 
 // wołaj to kiedy Ci się tam podoba 
 updateJsonData('./servers.json', transformation)
+  message.reply('Channel set up successfully!')
+  } else {
+    message.reply('You need specific permision to use this command("manage channels").')
+  }
 }
 
 module.exports = send
