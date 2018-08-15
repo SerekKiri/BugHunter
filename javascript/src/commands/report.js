@@ -1,4 +1,6 @@
-const serv = require('../servers.json')
+const fs = require('fs')
+
+const serv = fs.readFileSync('./servers.json')
 
 function bug(message) {
 

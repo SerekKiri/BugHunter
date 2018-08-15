@@ -1,5 +1,5 @@
 function send(message) {
-  const fs = require('fs');
+  const fs = require('fs')
 
     const pipe = (...fns) => val => fns.reduce((acc, fn) => fn(acc), val)
     
@@ -64,7 +64,7 @@ const updateJsonData = (file, pred) => {
 }
 
 // wołaj to kiedy Ci się tam podoba 
-updateJsonData('./src/servers.json', transformation)
+updateJsonData('./servers.json', transformation)
 }
 
 module.exports = send
