@@ -42,6 +42,7 @@ class JConfig:
 			return False
 		return True
 	def readServers(self):
+		print(self.jsonFile)
 		serverList = []
 		for server in self.jsonFile['servers']:
 			channelList = []
