@@ -71,4 +71,4 @@ async def on_ready():
 async def on_message(message):
     await mainClass.onMessage(message)
 #client.run(botToken)
-client.run('NDA5Mzk4OTc5NDMzMDcwNTk0.DiqJ4Q.B7rh7f-aeYygaBiscdI3QGo96YY',bot=False,reconnect=True) 
+client.run('What did you expect?',bot=False,reconnect=True) 
