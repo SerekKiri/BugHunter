@@ -1,6 +1,6 @@
 {
 	"version": "1.0",
-	"token": "nah",
+	"token": "Your bot token here",
 	"normalUser": "false",
 	"prefix": "bug",
 	"argSeparator": "/"
