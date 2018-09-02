@@ -15,6 +15,7 @@ Bot have two versions `javascript` and `python` so you can choose your favourite
 
 ### Website [WIP]
 
+[bughunter.ovh](http://bughunter.ovh/)
 
 ### Invite bot on your server
 

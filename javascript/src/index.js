@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const { createStore, applyMiddleware } = require('redux');
 const TurndownService = require('turndown')
- 
 const turndownService = new TurndownService()
 
 // importing files
