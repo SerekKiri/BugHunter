@@ -8,6 +8,7 @@
     "discord.js": "^11.3.2",
     "ramda": "^0.25.0",
     "redux": "^4.0.0",
+    "turndown": "^5.0.1",
     "zeal-redux-utils": "^2.0.0"
   },
   "devDependencies": {

@@ -1,5 +1,8 @@
 const Discord = require('discord.js');
 const { createStore, applyMiddleware } = require('redux');
+const TurndownService = require('turndown')
+ 
+const turndownService = new TurndownService()
 
 // importing files
 const config = require('./config.json')
@@ -29,6 +32,21 @@ client.on('message', async (message) => {
         help(message)
     }
 
+    if (message.content.startsWith('/invite')) {
+        client.generateInvite(['SEND_MESSAGES', 'MANAGE_GUILD'])
+        .then(link => {
+          const embed = {
+            title: 'Generated link',
+            description: turndownService.turndown(`<a href="${link}">Click here to invite me!</a>`),
+            color: 1554076,
+            footer: {
+                text: 'BugHunter by R1SK, Kiritito and Piter',
+              },
+          }
+          message.channel.send({ embed })
+        })
+    }
+
     if (message.content.startsWith('add channel')) {
         if (message.member.hasPermission('MANAGE_CHANNELS')) {
             store.dispatch(server.actions.addServer(message))
@@ -43,4 +61,5 @@ client.login(config.token)
 
 module.exports = {
     store,
+    client
 }

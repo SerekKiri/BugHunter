@@ -6,6 +6,7 @@ function help(message) {
         
         **Aviable commands:**
         /help (Help command)
+        /invite (If you want to invite me on your server use this command!)
         report bug <bug description>
         
         First you need to set up channel with logs.
