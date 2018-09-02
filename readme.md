@@ -25,7 +25,9 @@ Bot have two versions `javascript` and `python` so you can choose your favourite
 Please report all bugs and your ideas in [issues](https://github.com/SerekKiri/BugHunter/issues). Thanks for your help!
 
 
-### Authors
+### Authors:
  - SerekKiri - [Github](https://github.com/SerekKiri)
  - Piotr Aueternum - [Github](https://github.com/Piotr-Aueternum)
  - R1SK - [Github](https://github.com/wandal1337)
+ - Bjornskjald - [Github](https://github.com/Bjornskjald)
+ - Oschły - [Github](https://github.com/Oschly)
