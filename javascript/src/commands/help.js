@@ -5,7 +5,7 @@ function help(message) {
         description: `**Prefix: report**
         
         **Aviable commands:**
-        help me
+        /help (Help command)
         report bug <bug description>
         
         First you need to set up channel with logs.

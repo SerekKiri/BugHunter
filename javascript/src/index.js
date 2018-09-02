@@ -11,15 +11,12 @@ const initialState = require('./initial-state')
 const middleware = require('./middleware')
 const reducer = require('./reducer')
 
-// variables
-let channelsBugs = ['478884266852483073', '478886481281417216']
-
 const client = new Discord.Client();
 const store = createStore(reducer, initialState.jsonData, applyMiddleware(middleware.updateData))
 
 client.on('ready', () => {
     console.log(`Bug hunter has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds`)
-    client.user.setPresence({ game: { name: client.users.size + ' bugs hunters', type: 3 } })
+    client.user.setPresence({ game: { name: '/help', type: 1 } })
 })
 
 client.on('message', async (message) => {
@@ -28,7 +25,7 @@ client.on('message', async (message) => {
         report(message)
     }
 
-    if (message.content.startsWith(config.prefix + 'help')) {
+    if (message.content.startsWith('/help')) {
         help(message)
     }
 

@@ -38,7 +38,7 @@ function bug(message) {
    }
   }
  } else {
-  message.reply('You need to setup channel with logs. Just write ``add channel``.')
+  message.reply('You need to setup channel with logs. Just write ``add channel`` on your channel created for logs.')
  }
 }
 
