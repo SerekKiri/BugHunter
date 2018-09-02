@@ -12,7 +12,7 @@ Discord bot which will help bot that will help you sort out bugs.
 
 
 To run this bot you need:
- - Python `(Recommended version )`
+ - Python `(Recommended version ^3.0 )`
  - Discord Bot Token ([How to create your own bot guide](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token))
 
  How to run bot:
@@ -21,12 +21,9 @@ To run this bot you need:
 
 2. Change ``BotToken`` from ``Your bot token here`` on your own bot token
 
-3. Install all depedencies
-    ```
-    ```
-
 5. Now let's run the bot!
     ```
+    python report_bugs.py
     ```
 
 ### Join our discord server
