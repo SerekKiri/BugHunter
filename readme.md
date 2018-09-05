@@ -5,7 +5,6 @@
 Bot have two versions `javascript` and `python` so you can choose your favourite!
 
 
-
 ### Join our discord server
 
 [Invite link](https://discord.gg/7q5VcC6)
