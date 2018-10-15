@@ -13,8 +13,6 @@ type Configuration struct {
 	Prefix   string `json:"Prefix"`
 }
 
-const token string = ""
-
 var botID string
 
 func (c Configuration) toString() string {
@@ -45,7 +43,7 @@ func main() {
 		fmt.Println(conf.toString())
 	}
 
-	dg, err := discordgo.New("Bot " + token)
+	dg, err := discordgo.New("Bot ")
 
 	if err != nil {
 		fmt.Println(err.Error())
