@@ -1,6 +1,6 @@
 #  Bug Hunter
 
-### Java Script version by [SerekKir](https://github.com/SerekKiri) & [Piotr Aueternum](https://github.com/Piotr-Aueternum)
+### Java Script version by [SerekKiri](https://github.com/SerekKiri) & [Piotr Aueternum](https://github.com/Piotr-Aueternum)
 
 Discord bot which will help bot that will help you sort out bugs.
 

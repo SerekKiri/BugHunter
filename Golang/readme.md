@@ -1,6 +1,6 @@
 #  Bug Hunter
 
-### Golang version by [SerekKir](https://github.com/SerekKiri)
+### Golang version by [SerekKiri](https://github.com/SerekKiri)
 
 Discord bot which will help bot that will help you sort out bugs.
 
