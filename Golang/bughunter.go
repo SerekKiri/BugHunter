@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -15,33 +15,22 @@ type Configuration struct {
 
 var botID string
 
-func (c Configuration) toString() string {
-	bytes, err := json.Marshal(c)
+func LoadConfiguration(config string) Configuration {
+	var config Configuration
+	configFile, err := os.Open("./config/config.json")
+	defer configFile.Close()
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	return string(bytes)
-}
-
-func getConfig() []Configuration {
-	config := make([]Configuration, 1)
-	raw, err := ioutil.ReadFile("./config/config.json")
-
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-
-	json.Unmarshal(raw, &config)
+	jsonParser := json.NewDecoder(configFile)
+	jsonParser.Decode(&config)
 	return config
 }
 
 func main() {
-	config := getConfig()
-	fmt.Println(config)
+	config := LoadConfiguration()
 
-	for _, conf := range config {
-		fmt.Println(conf.toString())
-	}
+	fmt.Println(config)
 
 	dg, err := discordgo.New("Bot ")
 
