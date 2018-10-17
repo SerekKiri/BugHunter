@@ -77,7 +77,4 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Content == "ping" {
 		_, _ = s.ChannelMessageSend(m.ChannelID, "pong")
 	}
-
-	if m.Content == ""
-
 }
