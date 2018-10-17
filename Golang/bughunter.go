@@ -3,36 +3,41 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"os"
 
 	"github.com/bwmarrin/discordgo"
 )
 
-type Configuration struct {
+type Config struct {
 	BotToken string `json:"BotToken"`
 	Prefix   string `json:"Prefix"`
 }
 
 var botID string
 
-func LoadConfiguration(config string) Configuration {
-	var config Configuration
-	configFile, err := os.Open("./config/config.json")
-	defer configFile.Close()
+func loadConfig() Config {
+
+	jsonData, err := ioutil.ReadFile("./config/config.json")
+
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Panicf(err.Error())
 	}
-	jsonParser := json.NewDecoder(configFile)
-	jsonParser.Decode(&config)
+
+	config := Config{}
+	if err := json.Unmarshal(jsonData, &config); err != nil {
+		fmt.Println(err)
+		os.Exit(2)
+	}
+
 	return config
 }
 
 func main() {
-	config := LoadConfiguration()
+	config := loadConfig()
 
-	fmt.Println(config)
-
-	dg, err := discordgo.New("Bot ")
+	dg, err := discordgo.New("Bot " + config.BotToken)
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -72,4 +77,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Content == "ping" {
 		_, _ = s.ChannelMessageSend(m.ChannelID, "pong")
 	}
+
+	if m.Content == ""
+
 }

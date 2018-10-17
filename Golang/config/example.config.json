@@ -1,6 +1,4 @@
-[
-    {
+{
     "BotToken": "Your_bot_token_here",
     "Prefix": "prefix_here"
-    }
-]
+}
