@@ -70,11 +70,21 @@ func main() {
 
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
+	config := loadConfig()
+
 	if m.Author.ID == botID {
 		return
 	}
 
 	if m.Content == "ping" {
 		_, _ = s.ChannelMessageSend(m.ChannelID, "pong")
+	}
+
+	if m.Content == config.Prefix+"bug" && (len(m.Content) > 21) {
+		_, _ = s.ChannelMessageSend(m.ChannelID, "test")
+		fmt.Println(m.Content)
+	} else if m.Content == config.Prefix+"bug" && len(m.Content) <= 21 {
+		_, _ = s.ChannelMessageSend(m.ChannelID, "You need to describe bug, min 10 letters...")
+		fmt.Println(m.Content)
 	}
 }
