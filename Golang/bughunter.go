@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -13,6 +14,10 @@ import (
 type Config struct {
 	BotToken string `json:"BotToken"`
 	Prefix   string `json:"Prefix"`
+}
+
+type Servers struct {
+	ServerID string `json:"servers"`
 }
 
 var botID string
@@ -27,11 +32,28 @@ func loadConfig() Config {
 
 	config := Config{}
 	if err := json.Unmarshal(jsonData, &config); err != nil {
-		fmt.Println(err)
+		log.Panicf(err.Error())
 		os.Exit(2)
 	}
 
 	return config
+}
+
+func loadServers() Servers {
+	jsonData, err := ioutil.ReadFile("./servers/servers.json")
+
+	if err != nil {
+		log.Panicf(err.Error())
+	}
+
+	servers := Servers{}
+
+	if err := json.Unmarshal(jsonData, &servers); err != nil {
+		log.Panicf(err.Error())
+		os.Exit(2)
+	}
+
+	return servers
 }
 
 func main() {
@@ -71,6 +93,7 @@ func main() {
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	config := loadConfig()
+	servers := loadServers()
 
 	if m.Author.ID == botID {
 		return
@@ -80,11 +103,12 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		_, _ = s.ChannelMessageSend(m.ChannelID, "pong")
 	}
 
-	if m.Content == config.Prefix+"bug" && (len(m.Content) > 21) {
-		_, _ = s.ChannelMessageSend(m.ChannelID, "test")
-		fmt.Println(m.Content)
-	} else if m.Content == config.Prefix+"bug" && len(m.Content) <= 21 {
-		_, _ = s.ChannelMessageSend(m.ChannelID, "You need to describe bug, min 10 letters...")
-		fmt.Println(m.Content)
+	if strings.HasPrefix(m.Content, config.Prefix+"bug") {
+		_, _ = s.ChannelMessageSend(m.ChannelID, "ddd")
+	}
+
+	if m.Content == "add channel" {
+		fmt.Printf(servers.ServerID)
+		_, _ = s.ChannelMessageSend(m.ChannelID, "Channel successfully added")
 	}
 }
