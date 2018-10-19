@@ -17,7 +17,7 @@ type Config struct {
 }
 
 type Servers struct {
-	ServerID string `json:"servers"`
+	Servers map[string]string `json:"servers"`
 }
 
 var botID string
@@ -108,7 +108,11 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == "add channel" {
-		fmt.Printf(servers.ServerID)
-		_, _ = s.ChannelMessageSend(m.ChannelID, "Channel successfully added")
+		// You need o paste your server id becouse right now discordgo doesn't support it
+		// Will change it in future
+		guildID := "Your_guild_ID"
+		c := servers.Servers[guildID]
+		// actually you need to set up channel by adding it to servers.json :(
+		_, _ = s.ChannelMessageSend(c, "Channel successfully added")
 	}
 }

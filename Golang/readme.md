@@ -14,7 +14,9 @@ To run this bot you need:
 1. Rename ``example.config.json`` to ``config.json``
 
 2. Change ``BotToken`` from ``Your bot token here`` on your own bot token
-3. Install all depedencies
+3. Rename ``example.servers.json`` to ``servers.json``
+4. Change ``guildID`` to your guild ID and ``channelID`` to channel that you want to send logs
+5. Install all depedencies
 
     ```
     go get -v
@@ -23,8 +25,7 @@ To run this bot you need:
     ```
     dep ensure
     ```
-
-4. Now let's run the bot!
+6. Now let's run the bot!
     ```
     go run bughunter.go
     ```
