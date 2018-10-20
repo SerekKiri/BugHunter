@@ -22,6 +22,7 @@ type Servers struct {
 
 var botID string
 
+// Loading Configuration from conifg.json
 func loadConfig() Config {
 
 	jsonData, err := ioutil.ReadFile("./config/config.json")
@@ -39,6 +40,7 @@ func loadConfig() Config {
 	return config
 }
 
+// load guild ID and channel ID from servers.json
 func loadServers() Servers {
 	jsonData, err := ioutil.ReadFile("./servers/servers.json")
 
@@ -56,6 +58,7 @@ func loadServers() Servers {
 	return servers
 }
 
+// main function
 func main() {
 	config := loadConfig()
 
@@ -90,15 +93,17 @@ func main() {
 	return
 }
 
+// Messages from discord
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
-	config := loadConfig()
-	servers := loadServers()
+	config := loadConfig()   // Get data from config
+	servers := loadServers() // Get data about servers
 
 	if m.Author.ID == botID {
 		return
 	}
 
+	// Test command
 	if m.Content == "ping" {
 		_, _ = s.ChannelMessageSend(m.ChannelID, "pong")
 	}
