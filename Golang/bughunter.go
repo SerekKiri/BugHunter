@@ -114,7 +114,22 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		guildID := "Your_guild_ID"
 		c := servers.Servers[guildID]
 		// actually you need to set up channel by adding it to servers.json :(
-		_, _ = s.ChannelMessageSendEmbed(c, &discordgo.MessageEmbed{Description: m.Content})
+		switch {
+		case len(m.Content) > 20:
+			_, err := s.ChannelMessageSendEmbed(c, &discordgo.MessageEmbed{
+				Title:       "Report from " + m.Author.Username,
+				Description: "**Report text:**\n" + m.Content,
+				Color:       15859772,
+				Footer: &discordgo.MessageEmbedFooter{
+					Text: "BugHunter by R1SK, Kiritito and Piter",
+				},
+			})
+			if err != nil {
+				log.Panicf(err.Error())
+			}
+		case len(m.Content) < 20:
+			_, _ = s.ChannelMessageSend(m.ChannelID, "**"+m.Author.Username+"**, you need to describe bug, min 10 letters")
+		}
 	}
 
 	if m.Content == "add channel" {
