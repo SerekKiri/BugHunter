@@ -114,7 +114,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		guildID := "Your_guild_ID"
 		c := servers.Servers[guildID]
 		// actually you need to set up channel by adding it to servers.json :(
-		_, _ = s.ChannelMessageSend(c, m.Content)
+		_, _ = s.ChannelMessageSendEmbed(c, &discordgo.MessageEmbed{Description: m.Content})
 	}
 
 	if m.Content == "add channel" {
@@ -125,4 +125,5 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		// actually you need to set up channel by adding it to servers.json :(
 		_, _ = s.ChannelMessageSend(c, m.Content)
 	}
+
 }
